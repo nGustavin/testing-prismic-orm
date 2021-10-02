@@ -45,12 +45,29 @@ export class UserController{
     async delete(req: Request, res: Response): Promise<any>{
         const { id } = req.params
 
-        const deleteUser = await prisma.user.findUnique({
+
+        const deleteUser = await prisma.user.delete({
             where: {
                 id: id
             }
         })
 
-        return res.status(200).json(deleteUser)
+        res.status(200).json(deleteUser)
+    }
+
+    async one(req: Request, res: Response): Promise<any>{
+        const { id } = req.params
+
+        const user = await prisma.user.findFirst({
+            where: {
+                id: id
+            }
+        })
+
+        if(!user){
+            return res.status(404).json({Error: "User not found"})
+        }
+
+        return res.status(200).json(user)
     }
 }

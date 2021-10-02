@@ -9,4 +9,6 @@ routes.post('/user/new', userController.store)
 
 routes.get('/users', userController.all)
 
-routes.delete('user/delete/:id', userController.delete)
+routes.delete('/user/delete/:id', userController.delete)
+ 
+routes.get('/user/:id', userController.one)
