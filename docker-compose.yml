@@ -1,8 +1,25 @@
 services:
+  database_prisma:
+    image: postgres:latest
+    container_name: dev-prisma-db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=prisma
+    volumes:
+      - pgdata:/data/postgres
+    
   app:
     build: .
-    container_name: prisma-server
+    container_name: dev-prisma-server
     ports: 
       - 3333:3333
     volumes:
       - .:/usr/app
+  
+volumes:
+  pgdata: 
+    driver: local
