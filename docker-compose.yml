@@ -19,6 +19,10 @@ services:
       - 3333:3333
     volumes:
       - .:/usr/app
+    links:
+      - database_prisma
+    depends_on:
+      - database_prisma
   
 volumes:
   pgdata: 

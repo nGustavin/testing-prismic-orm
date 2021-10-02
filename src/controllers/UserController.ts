@@ -1,5 +1,6 @@
 import { PrismaClient, Prisma } from '@prisma/client'
 import { Request, Response } from 'express'
+import {hash} from 'bcryptjs'
 
 
 type User = {
@@ -23,9 +24,11 @@ export class UserController{
             password,
         }: User = req.body
 
+        const passwordHash = await hash(password, 8)
+
         await prisma.user.create({
             data: {
-                age, bio, email, name, password
+                age, bio, email, name, password: passwordHash,
             }
         })
 
@@ -37,5 +40,17 @@ export class UserController{
 
         res.status(200).json(users)
 
+    }
+
+    async delete(req: Request, res: Response): Promise<any>{
+        const { id } = req.params
+
+        const deleteUser = await prisma.user.findUnique({
+            where: {
+                id: id
+            }
+        })
+
+        return res.status(200).json(deleteUser)
     }
 }
