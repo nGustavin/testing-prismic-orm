@@ -11,7 +11,7 @@ generator client {
 }
 
 model User{
-  id          Int     @id @unique @default(autoincrement())
+  id          String     @id @unique @default(uuid())
   bio         String
   name        String
   email       String @unique
@@ -22,7 +22,7 @@ model User{
 model UserTags {
   id Int @id @unique @default(autoincrement())
   user User @relation(fields: [userId], references: [id])
-  userId Int @unique
+  userId String @unique
   tag Tag @relation(fields: [tagId], references: [id])
   tagId Int @unique
 }
