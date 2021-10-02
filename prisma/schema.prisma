@@ -14,8 +14,9 @@ model User{
   id          String     @id @unique @default(uuid())
   bio         String
   name        String
-  email       String @unique
-  tagId       Int 
+  age         Int
+  email       String  
+  password    String
   tags UserTags?
 }
 

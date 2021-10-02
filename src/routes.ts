@@ -1,7 +1,12 @@
 import {Router} from 'express'
+import { UserController } from './controllers/UserController'
+
+const userController = new UserController()
 
 export const routes = Router()
 
-routes.get('/', (req, res) => res.status(200).json("alo"))
+routes.post('/users', userController.store)
+
+routes.get('/users', userController.all)
 
 
