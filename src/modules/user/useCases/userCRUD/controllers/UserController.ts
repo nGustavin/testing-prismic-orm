@@ -34,7 +34,15 @@ export class UserController {
   }
 
   async all (req: Request, res: Response): Promise<any> {
-    const users = await prisma.user.findMany()
+    const users = await prisma.user.findMany({
+      include: {
+        tags: {
+          include: {
+            tag: true
+          }
+        }
+      }
+    })
 
     res.status(200).json(users)
   }
