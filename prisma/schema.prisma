@@ -23,9 +23,9 @@ model User{
 
 model UserTags {
   id      Int     @id @unique @default(autoincrement())
-  user    User    @relation(fields: [userId], references: [id])
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId  String 
-  tag     Tag     @relation(fields: [tagId], references: [id])
+  tag     Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   tagId   Int 
 }
 
