@@ -1,6 +1,8 @@
 {
     "compilerOptions": {
+        "baseUrl": "./src",
         "sourceMap": true,
+        "moduleResolution": "node",
         "outDir": "dist",
         "strict": true,
         "lib": ["esnext"],

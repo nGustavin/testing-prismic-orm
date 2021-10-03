@@ -4,6 +4,15 @@ import { routes } from './routes'
 
 const app = express()
 
+process.on('uncaughtException', err => {
+    console.log(err)
+    process.exit(1)
+})
+
+process.on('SIGTERM', () => {
+    process.exit();
+});
+
 app.use(cors())
 app.use(express.json())
 

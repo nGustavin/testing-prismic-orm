@@ -39,20 +39,21 @@ export class UserController{
         const users = await prisma.user.findMany()
 
         res.status(200).json(users)
-
     }
 
     async delete(req: Request, res: Response): Promise<any>{
         const { id } = req.params
 
-
-        const deleteUser = await prisma.user.delete({
-            where: {
-                id: id
-            }
-        })
-
-        res.status(200).json(deleteUser)
+        try{
+            const deleteUser = await prisma.user.delete({
+                where: {
+                    id: id
+                }
+            })
+            return res.status(200).json(deleteUser)
+        }catch(err){
+            return res.status(500).json({err, log: "Test dnv soq 14"})
+        }
     }
 
     async one(req: Request, res: Response): Promise<any>{
