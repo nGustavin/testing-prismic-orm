@@ -1,7 +1,7 @@
-import { prisma } from 'database/connection'
-import { AppError } from 'errors/AppError'
 import { NextFunction, Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'
+import { prisma } from '../database/connection'
+import { AppError } from '../errors/AppError'
 
 type IPayload = {
     sub: string;

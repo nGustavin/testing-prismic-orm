@@ -1,8 +1,8 @@
 import { compare } from 'bcryptjs'
-import { prisma } from 'database/connection'
-import { AppError } from 'errors/AppError'
 import { Request, Response } from 'express'
 import { sign } from 'jsonwebtoken'
+import { prisma } from '../../../../../database/connection'
+import { AppError } from '../../../../../errors/AppError'
 
 type IRequest = {
     email: string;

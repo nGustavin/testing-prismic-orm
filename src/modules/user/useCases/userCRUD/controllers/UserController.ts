@@ -1,7 +1,7 @@
 import { hash } from 'bcryptjs'
-import { prisma } from 'database/connection'
-import { AppError } from 'errors/AppError'
 import { Request, Response } from 'express'
+import { prisma } from '../../../../../database/connection'
+import { AppError } from '../../../../../errors/AppError'
 
 type User = {
     id: string;
