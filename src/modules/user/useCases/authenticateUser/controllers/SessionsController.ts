@@ -1,5 +1,6 @@
-import { PrismaClient } from '@prisma/client'
 import { compare } from 'bcryptjs'
+import { prisma } from 'database/connection'
+import { AppError } from 'errors/AppError'
 import { Request, Response } from 'express'
 import { sign } from 'jsonwebtoken'
 
@@ -18,9 +19,6 @@ type IResponse = {
     };
     token: string;
 }
-
-const prisma = new PrismaClient()
-
 export class AuthenticateUserController {
   async execute (req: Request, res: Response): Promise<IResponse | Record<string, any>> {
     const { email, password }: IRequest = req.body
@@ -32,13 +30,13 @@ export class AuthenticateUserController {
     })
 
     if (!user) {
-      return res.status(403).json({ error: 'Email or password incorrect' })
+      throw new AppError('Email or password incorrect', 401)
     }
 
     const passwordMatch = await compare(password, user.password)
 
     if (!passwordMatch) {
-      return res.status(403).json({ error: 'Email or password incorrect' })
+      throw new AppError('Email or password incorrect', 401)
     }
 
     const token = sign({}, '0b8aa71d7e2df0e935f77bffd93837af', {

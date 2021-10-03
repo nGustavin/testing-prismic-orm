@@ -1,5 +1,6 @@
-import { PrismaClient } from '@prisma/client'
 import { hash } from 'bcryptjs'
+import { prisma } from 'database/connection'
+import { AppError } from 'errors/AppError'
 import { Request, Response } from 'express'
 
 type User = {
@@ -10,8 +11,6 @@ type User = {
     age: number;
     email: string;
 }
-
-const prisma = new PrismaClient()
 
 export class UserController {
   async store (req: Request, res: Response): Promise<any> {
@@ -65,7 +64,7 @@ export class UserController {
     })
 
     if (!user) {
-      return res.status(404).json({ Error: 'User not found' })
+      throw new AppError('User not found', 401)
     }
 
     return res.status(200).json(user)
