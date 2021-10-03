@@ -1,4 +1,4 @@
-import {Router} from 'express'
+import { Router } from 'express'
 import { UserController } from '../modules/user/useCases/userCRUD/controllers/UserController'
 
 const userController = new UserController()
@@ -10,5 +10,5 @@ userRoutes.post('/new', userController.store)
 userRoutes.get('/', userController.all)
 
 userRoutes.delete('/delete/:id', userController.delete)
- 
+
 userRoutes.get('/user/:id', userController.one)

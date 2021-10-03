@@ -5,13 +5,13 @@ import { routes } from './routes/index'
 const app = express()
 
 process.on('uncaughtException', err => {
-    console.log(err)
-    process.exit(1)
+  console.log(err)
+  process.exit(1)
 })
 
 process.on('SIGTERM', () => {
-    process.exit();
-});
+  process.exit()
+})
 
 app.use(cors())
 app.use(express.json())
