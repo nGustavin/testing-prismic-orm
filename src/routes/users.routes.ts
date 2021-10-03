@@ -6,12 +6,10 @@ const userController = new UserController()
 
 export const userRoutes = Router()
 
-userRoutes.use(ensureAuthenticated)
-
 userRoutes.post('/new', userController.store)
 
-userRoutes.get('/', userController.all)
+userRoutes.get('/', ensureAuthenticated, userController.all)
 
-userRoutes.delete('/delete/:id', userController.delete)
+userRoutes.delete('/delete/:id', ensureAuthenticated, userController.delete)
 
-userRoutes.get('/user/:id', userController.one)
+userRoutes.get('/user/:id', ensureAuthenticated, userController.one)
