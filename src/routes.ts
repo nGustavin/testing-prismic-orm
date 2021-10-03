@@ -1,14 +1,14 @@
 import {Router} from 'express'
-import { UserController } from './controllers/UserController'
+import { UserController } from './modules/user/useCases/userCRUD/controllers/UserController'
 
 const userController = new UserController()
 
 export const routes = Router()
 
-routes.post('/user/new', userController.store)
+routes.post('/new', userController.store)
 
-routes.get('/users', userController.all)
+routes.get('/', userController.all)
 
-routes.delete('/user/delete/:id', userController.delete)
+routes.delete('/delete/:id', userController.delete)
  
 routes.get('/user/:id', userController.one)
