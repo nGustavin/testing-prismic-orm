@@ -17,7 +17,7 @@ model User{
   age         Int
   email       String  
   password    String
-  avatar      String
+  avatar      String?
   tags UserTags[]
 }
 
