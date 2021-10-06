@@ -9,3 +9,5 @@ export const userTagsRoutes = Router()
 userTagsRoutes.use(ensureAuthenticated)
 
 userTagsRoutes.post('/add', tagController.addTag)
+
+userTagsRoutes.post('/delete', tagController.delete)

@@ -24,4 +24,22 @@ export class UserTagsController {
 
     return res.status(201).json(newUserTag)
   }
+
+  async delete (req: Request, res: Response): Promise<any> {
+    const { userId, tagsId } = req.body
+
+    if (!userId || !tagsId) {
+      throw new AppError('userid and tagsid array must be provided to delete an tag')
+    }
+
+    await prisma.userTags.deleteMany({
+      where: {
+        userId: userId,
+        AND: {
+          tagId: tagsId.map((tag: number) => tag)
+        }
+
+      }
+    })
+  }
 }
