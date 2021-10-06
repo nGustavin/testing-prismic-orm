@@ -26,3 +26,9 @@ userRoutes.patch(
   uploadAvatar.single('avatar'),
   userAvatarController.add
 )
+
+userRoutes.patch(
+  '/user/:id/edit',
+  ensureAuthenticated,
+  userController.update
+)

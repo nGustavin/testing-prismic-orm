@@ -15,8 +15,8 @@ model User{
   bio         String
   name        String
   age         Int
-  email       String  
-  password    String
+  email       String    
+  password    String?
   avatar      String?
   tags UserTags[]
 }

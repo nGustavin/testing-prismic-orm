@@ -77,4 +77,32 @@ export class UserController {
 
     return res.status(200).json(user)
   }
+
+  async update (req: Request, res: Response): Promise<any> {
+    const { id } = req.params
+    const {
+      bio,
+      name,
+      age
+    } = req.body
+
+    const currentUser = await prisma.user.findFirst({
+      where: { id: id }
+    })
+
+    const newUser = await prisma.user.update({
+      where: {
+        id: id
+      },
+      data: {
+        email: currentUser?.email,
+        password: currentUser?.password,
+        bio: bio || currentUser?.bio,
+        name: name || currentUser?.name,
+        age: age || currentUser?.age
+      }
+    })
+
+    return res.status(200).json(newUser)
+  }
 }
