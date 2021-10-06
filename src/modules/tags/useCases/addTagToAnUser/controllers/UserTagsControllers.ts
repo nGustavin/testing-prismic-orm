@@ -13,11 +13,13 @@ export class UserTagsController {
       throw new AppError('tag or user invalid')
     }
 
-    const newUserTag = await prisma.userTags.create({
-      data: {
-        tagId: Number(tag),
-        userId: user
-      }
+    const newUserTag = await prisma.userTags.createMany({
+      data: tag.map((tagId: number) => {
+        return {
+          userId: user,
+          tagId: tagId
+        }
+      })
     })
 
     return res.status(201).json(newUserTag)
